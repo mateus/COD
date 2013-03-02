@@ -223,3 +223,216 @@
 [02/03/2013 16:11:09] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
 [02/03/2013 16:11:09] - Resposta: 10.3.1.21
 
+[02/03/2013 16:21:34] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:21:34] - Resposta: 10.3.1.21
+
+[02/03/2013 16:22:07] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:22:07] - Resposta: 10.3.1.21
+
+[02/03/2013 16:25:35] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:25:35] - Resposta: 10.3.1.21
+
+[02/03/2013 16:25:40] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:25:40] - Resposta: 10.3.1.21
+
+[02/03/2013 16:26:00] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:26:00] - Resposta: 10.3.1.21
+
+[02/03/2013 16:26:05] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:26:05] - Resposta: 10.3.1.21
+
+[02/03/2013 16:26:22] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:26:22] - Resposta: 10.3.1.21
+
+[02/03/2013 16:26:36] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:26:36] - Resposta: 10.3.1.21
+
+[02/03/2013 16:26:42] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:26:42] - Resposta: 10.3.1.21
+
+[02/03/2013 16:26:46] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:26:46] - Resposta: 10.3.1.21
+
+[02/03/2013 16:27:33] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:27:33] - Resposta: 10.3.1.21
+
+[02/03/2013 16:28:04] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:28:04] - Resposta: 10.3.1.21
+
+[02/03/2013 16:28:34] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:28:34] - Resposta: 10.3.1.21
+
+[02/03/2013 16:28:50] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:28:50] - Resposta: 10.3.1.21
+
+[02/03/2013 16:29:10] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:29:10] - Resposta: 10.3.1.21
+
+[02/03/2013 16:29:38] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 16:29:38] - Resposta: 10.3.1.18
+
+[02/03/2013 16:29:53] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:29:53] - Resposta: 10.3.1.21
+
+[02/03/2013 16:30:33] - Recebendo requisição da operação "fatorial" pelo IP 10.3.1.20
+[02/03/2013 16:30:33] - Resposta: 10.3.1.21
+
+[02/03/2013 17:09:55] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:09:55] - Resposta: 10.3.1.21
+
+[02/03/2013 17:10:15] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:10:15] - Resposta: 10.3.1.21
+
+[02/03/2013 17:10:35] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:10:35] - Resposta: 10.3.1.21
+
+[02/03/2013 17:12:23] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:12:23] - Resposta: 10.3.1.21
+
+[02/03/2013 17:13:25] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:13:25] - Resposta: 10.3.1.21
+
+[02/03/2013 17:13:53] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:13:53] - Resposta: 10.3.1.21
+
+[02/03/2013 17:14:04] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:14:04] - Resposta: 10.3.1.21
+
+[02/03/2013 17:14:20] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 17:14:20] - Resposta: 10.3.1.21
+
+[02/03/2013 17:14:32] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 17:14:32] - Resposta: 10.3.1.18
+
+[02/03/2013 17:14:36] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 17:14:36] - Resposta: 10.3.1.21
+
+[02/03/2013 17:44:26] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 17:44:26] - Resposta: 10.3.1.18
+
+[02/03/2013 17:44:44] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 17:44:44] - Resposta: 10.3.1.21
+
+[02/03/2013 17:45:00] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 17:45:00] - Resposta: 10.3.1.18
+
+[02/03/2013 18:05:13] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:05:13] - Resposta: 10.3.1.18
+
+[02/03/2013 18:06:03] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:06:03] - Resposta: 10.3.1.18
+
+[02/03/2013 18:06:29] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:06:29] - Resposta: 10.3.1.18
+
+[02/03/2013 18:06:47] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:06:47] - Resposta: 10.3.1.18
+
+[02/03/2013 18:07:23] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:07:23] - Resposta: 10.3.1.18
+
+[02/03/2013 18:07:51] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:07:51] - Resposta: 10.3.1.18
+
+[02/03/2013 18:08:35] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:08:35] - Resposta: 10.3.1.18
+
+[02/03/2013 18:08:49] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:08:49] - Resposta: 10.3.1.18
+
+[02/03/2013 18:09:09] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:09:09] - Resposta: 10.3.1.18
+
+[02/03/2013 18:15:03] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:15:03] - Resposta: 10.3.1.21
+
+[02/03/2013 18:15:06] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:15:06] - Resposta: 10.3.1.18
+
+[02/03/2013 18:15:14] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:15:14] - Resposta: 10.3.1.18
+
+[02/03/2013 18:15:18] - Recebendo requisição da operação "divisao" pelo IP 10.3.1.20
+[02/03/2013 18:15:18] - Resposta: 10.3.1.18
+
+[02/03/2013 18:15:36] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 18:15:36] - Resposta: 10.3.1.21
+
+[02/03/2013 18:15:40] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:15:40] - Resposta: 10.3.1.21
+
+[02/03/2013 18:28:28] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:28:28] - Resposta: 10.3.1.18
+
+[02/03/2013 18:28:55] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:28:55] - Resposta: 10.3.1.21
+
+[02/03/2013 18:29:08] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:29:08] - Resposta: 10.3.1.18
+
+[02/03/2013 18:29:10] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:29:10] - Resposta: 10.3.1.21
+
+[02/03/2013 18:31:34] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:31:34] - Resposta: 10.3.1.18
+
+[02/03/2013 18:31:36] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:31:36] - Resposta: 10.3.1.21
+
+[02/03/2013 18:32:14] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:32:14] - Resposta: 10.3.1.18
+
+[02/03/2013 18:32:15] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:32:15] - Resposta: 10.3.1.21
+
+[02/03/2013 18:35:42] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:35:42] - Resposta: 10.3.1.18
+
+[02/03/2013 18:35:52] - Recebendo requisição da operação "divisao" pelo IP 10.3.1.20
+[02/03/2013 18:35:52] - Resposta: 10.3.1.18
+
+[02/03/2013 18:36:16] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:36:16] - Resposta: 10.3.1.18
+
+[02/03/2013 18:36:30] - Recebendo requisição da operação "divisao" pelo IP 10.3.1.20
+[02/03/2013 18:36:30] - Resposta: 10.3.1.18
+
+[02/03/2013 18:36:42] - Recebendo requisição da operação "subtracao" pelo IP 10.3.1.20
+[02/03/2013 18:36:42] - Resposta: 10.3.1.18
+
+[02/03/2013 18:36:52] - Recebendo requisição da operação "subtracao" pelo IP 10.3.1.20
+[02/03/2013 18:36:52] - Resposta: 10.3.1.18
+
+[02/03/2013 18:37:08] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:37:08] - Resposta: 10.3.1.21
+
+[02/03/2013 18:37:20] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:37:20] - Resposta: 10.3.1.18
+
+[02/03/2013 18:38:03] - Recebendo requisição da operação "divisao" pelo IP 10.3.1.20
+[02/03/2013 18:38:03] - Resposta: 10.3.1.18
+
+[02/03/2013 18:42:20] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:42:20] - Resposta: 10.3.1.18
+
+[02/03/2013 18:42:27] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:42:27] - Resposta: 10.3.1.21
+
+[02/03/2013 18:42:37] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 18:42:37] - Resposta: 10.3.1.21
+
+[02/03/2013 18:42:41] - Recebendo requisição da operação "produto" pelo IP 10.3.1.20
+[02/03/2013 18:42:41] - Resposta: 10.3.1.18
+
+[02/03/2013 18:42:44] - Recebendo requisição da operação "divisao" pelo IP 10.3.1.20
+[02/03/2013 18:42:44] - Resposta: 10.3.1.18
+
+[02/03/2013 18:42:47] - Recebendo requisição da operação "subtracao" pelo IP 10.3.1.20
+[02/03/2013 18:42:47] - Resposta: 10.3.1.18
+
+[02/03/2013 18:42:58] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 18:42:58] - Resposta: 10.3.1.18
+
+[02/03/2013 18:43:08] - Recebendo requisição da operação "levenshtein" pelo IP 10.3.1.20
+[02/03/2013 18:43:08] - Resposta: 10.3.1.21
+
