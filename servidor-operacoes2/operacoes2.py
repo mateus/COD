@@ -3,10 +3,13 @@
 
 import multiprocessing
 import settings
+import pickle
 
 from socket import *
 from threading import Thread
 from multiprocessing import Process, Manager
+from Crypto.PublicKey import RSA
+from Crypto.Util import randpool
 
 
 class Operacoes2Servidor:
@@ -19,17 +22,14 @@ class Operacoes2Servidor:
         self.server_socket.listen(5)
         self.MAX_PACOTE = 1024
 
+        blah = randpool.RandomPool()
+        self.RSAKey = RSA.generate(1024, blah.get_bytes)   
+        self.RSAPubKey = self.RSAKey.publickey()
+
     def enviar(self, valor, endereco):
-        aux = 0
-        #tam = len(valor)
-        #if tam > self.MAX_PACOTE:
-        #   for i in xrange(tam / self.MAX_PACOTE):
-        #       pacote = valor[i*self.MAX_PACOTE:(i+1)*self.MAX_PACOTE]
-        #       self.server_socket.sendto(pacote, endereco)
-        #else:
-        #   self.server_socket.sendto(valor, endereco)
         print '\033[0;32mResultado: \033[1;33m{}\033[0m\n'.format(valor)
-        self.conn.send(str(valor))
+        valor = self.clientePubKey.encrypt(str(valor), 32)[0]
+        self.conn.send(valor)
         self.conn.close()
 
     def soma(self, x, y):
@@ -59,10 +59,13 @@ class Operacoes2Servidor:
         return str(current[n])
 
     def iniciar(self):
-        while(1):
+        while 1:
             self.conn, addr = self.server_socket.accept()
-            recv_data = self.conn.recv(1024)
-            data = recv_data.split()
+            self.clientePubKey = pickle.loads(self.conn.recv(1024))
+            self.conn.send(pickle.dumps(self.RSAPubKey))
+
+            data = self.RSAKey.decrypt(self.conn.recv(1024))
+            data = data.split()
             args = '\033[0;32m e \033[1;33m'.join(data[1:])
             print '\033[1;33m{}\033[0;32m de \033[1;33m{}\033[0m'.format(data[0], args)
 
