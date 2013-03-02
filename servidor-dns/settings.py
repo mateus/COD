@@ -7,5 +7,5 @@ OPERACOES = {
 	"subtracao": ['10.3.1.18', ],
 	"produto": ['10.3.1.18', ],
 	"divisao": ['10.3.1.18', ],
-	"fatorial": ['10.3.1.21', ],
+	"levenshtein": ['10.3.1.21', ],
 }
