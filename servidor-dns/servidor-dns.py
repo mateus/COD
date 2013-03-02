@@ -2,9 +2,11 @@
 #coding: utf-8
 
 import settings
+import hashlib
 
 from socket import *
 from datetime import datetime
+from Crypto.Cipher import AES
 
 
 class ServidorDNS():
@@ -13,8 +15,13 @@ class ServidorDNS():
         self.address = (ip, settings.SERVIDOR_DNS_PORTA)
         self.server_socket = socket(AF_INET, SOCK_DGRAM)
         self.server_socket.bind(self.address)
+        self.md5 = hashlib.md5('Linux').hexdigest()
+        self.aes = AES.new(self.md5, AES.MODE_ECB)
 
     def envia(self, resultado, endereco):
+        if len(resultado) % 16 != 0:
+            resultado += ' ' * (16 - len(resultado) % 16)
+        resultado = self.aes.encrypt(resultado)
         self.server_socket.sendto(resultado, endereco)
 
     def hora_atual(self):
@@ -50,6 +57,7 @@ class ServidorDNS():
         try:
             while 1:
                 recv_data, addr = self.server_socket.recvfrom(1024)
+                recv_data = self.aes.decrypt(recv_data).strip()
                 print '[{0}] - \033[0;32mRecebendo requisição da operação \033[1;33m{1}\033[0;32m pelo IP \033[1;33m{2} \033[0m'.format(self.hora_atual(), recv_data, addr[0])
                 if recv_data in settings.OPERACOES:
                     tamanhos[recv_data]['atual'] = (tamanhos[recv_data]['atual'] + 1) % tamanhos[recv_data]['total_ips']

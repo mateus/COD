@@ -10,7 +10,7 @@ OPERACOES = {
                 'soma' : {'nome': 'soma', 'funcao': 'soma', 'num_args' : 2}, 
                 'produto' : {'nome': 'produto', 'funcao': 'produto', 'num_args' : 2}, 
                 'divisao' : {'nome': 'divisao', 'funcao': 'divisao', 'num_args' : 2}, 
-                'fatorial' : {'nome': 'fatorial', 'funcao': 'fatorial', 'num_args' : 1},
+                'levenshtein' : {'nome': 'levenshtein', 'funcao': 'levenshtein', 'num_args' : 2},
             }
 DNS_ERRO_MSG = 'DNS_ERRO'
 SERVIDOR_ERRO = 'ERRO'

@@ -7,7 +7,7 @@ import threading
 import functools
 import settings
 import hashlib
-from Crypto.Chipher import AES
+from Crypto.Cipher import AES
 
 
 def Decorator_funcoes():
@@ -33,19 +33,19 @@ def Decorator_requisita():
             return functools.partial(self, obj)
 
         def __call__(self, *args, **kwargs):
+            objeto_operacao = args[0]
             tipo = args[1]
             print '\033[0;32mPerguntando quem tem a operação: \033[1;33m{}\033[0m'.format(tipo)
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            #s.settimeout(1)
+            s.settimeout(1)
             endereco = (settings.SERVIDOR_DNS_IP, settings.SERVIDOR_DNS_PORTA)
             try:
-                msg = args[0].criptografa_mensagem(tipo)
-                print msg
+                msg = objeto_operacao.criptografa_mensagem(tipo)
                 s.sendto(msg, endereco)
-                resposta, endereco = s.recvfrom(args[0].MAX_PACOTE)
-            except socket.timeout as e:
+                resposta, endereco = s.recvfrom(objeto_operacao.MAX_PACOTE)
+                resposta = objeto_operacao.decriptografa_mensagem(resposta).strip()
+            except socket.timeout:
                 print '\033[1;31mServidor DNS desconectado\033[0m'
-                print e
                 return settings.SERVIDOR_ERRO
             except socket.error:
                 print '\033[1;31mFalha na conexão com o Servidor DNS\033[0m'
@@ -56,7 +56,7 @@ def Decorator_requisita():
             else:
                 ip_servidor_operacoes = resposta
                 print '\033[1;33m{} \033[0;32mtem a operação \033[1;33m{}\033[0m'.format(ip_servidor_operacoes, tipo)
-                resultado = self.fn(args[0], args[1], args[2], ip_servidor_operacoes)
+                resultado = self.fn(objeto_operacao, tipo, args[2], ip_servidor_operacoes)
                 if resultado == settings.SERVIDOR_ERRO:
                     print '\033[1;31mServidor de Operações retornou erro\033[0m'
                 return resultado
@@ -97,20 +97,20 @@ class Operacoes(object):
         return resultado
 
     @Decorator_funcoes()
-    def fatorial(self, x):
-        tipo = settings.OPERACOES['fatorial']['nome']
-        resultado = self.requisita(tipo, (x))
+    def levenshtein(self, x, y):
+        tipo = settings.OPERACOES['levenshtein']['nome']
+        resultado = self.requisita(tipo, (x, y))
         return resultado
 
-    def gera_mensagem_16(msg):
-        return msg + ' ' * (16 - len(a) % 16)
+    def gera_mensagem_16(self, msg):
+        return msg + ' ' * (16 - len(msg) % 16)
 
-    def criptografa_mensagem(msg):
-        msg = gera_mensagem_16(msg)
+    def criptografa_mensagem(self, msg):
+        msg = self.gera_mensagem_16(msg)
         msg = self.aes.encrypt(msg)
         return msg
 
-    def decriptografa_mensagem(msg):
+    def decriptografa_mensagem(self, msg):
         msg = self.aes.decrypt(msg)
         return msg
 
@@ -166,7 +166,7 @@ if __name__=='__main__':
                 dados_operacao = settings.OPERACOES[operacao]
                 valores = []
                 for i in xrange(dados_operacao['num_args']):
-                    valores.append(raw_input('\033[0;32m{}º valor: \033[0m'.format(i+1)))
+                    valores.append(raw_input('\033[0;32m{}º argumento: \033[0m'.format(i+1)))
                 resultado = operacoes.__getattribute__(dados_operacao['funcao'])(*valores)
                 if resultado != settings.SERVIDOR_ERRO and resultado != settings.DNS_ERRO_MSG:
                     if len(valores) == 1:
@@ -183,4 +183,3 @@ if __name__=='__main__':
         print '\n\033[0;34m === Cliente finalizado ===\033[0m'
         exit()
     
-  
