@@ -1,0 +1,91 @@
+#!/usr/bin/python
+#coding: utf-8
+
+import socket
+import sys
+import threading
+import functools
+
+
+def decorator_funcoes():
+    class _MyDecorator(object):
+        def __init__(self, fn):
+            self.fn = fn
+
+        def __get__(self, obj, type=None):
+            return functools.partial(self, obj)
+
+        def __call__(self, *args, **kwargs):
+            threading.Thread(target=self.fn, args=args).start()
+
+    return _MyDecorator
+
+def decorator_requista():
+    class _MyDecorator(object):
+        def __init__(self, fn):
+            self.fn = fn
+
+        def __get__(self, obj, type=None):
+            return functools.partial(self, obj)
+
+        def __call__(self, *args, **kwargs):
+            threading.Thread(target=self.fn, args=args).start()
+
+    return _MyDecorator
+
+class Operacoes(object): 
+  def __init__(self, ip_dns):
+    self.ip_dns = ip_dns
+    self.porta = 8888
+    self.MAX_PACOTE = 1024
+  
+  @decorator_funcoes()
+  def soma(self, x, y):
+    tipo = "soma {0} {1}".format(x, y)
+    retorno = self.requisita(tipo)
+    print 'soma = ', retorno
+    return retorno
+
+  @decorator_funcoes()
+  def produto(self, x, y):
+    tipo = "produto {0} {1}".format(x, y)
+    retorno = self.requisita(tipo)
+    print 'pruduto = ', retorno
+    return retorno
+
+  @decorator_funcoes()
+  def fatorial(self, x):
+    tipo = "xfatorial {0}".format(x)
+    retorno = self.requisita(tipo)
+    print 'fatorial = ', retorno
+    return retorno
+
+  @decorator_requista()
+  def requisita(self, tipo):
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    endereco = (self.ip, self.porta)
+    s.sendto(tipo, endereco)
+    #dados, endereco = s.recvfrom(self.MAX_PACOTE)
+    dados = ''
+    dado, endereco = s.recvfrom(self.MAX_PACOTE)
+    while dado != 'FIM':
+      dados += dado
+      dado, _ = s.recvfrom(self.MAX_PACOTE)
+    return dados
+
+
+if __name__=='__main__':
+  operacoes = Operacoes('10.3.1.19')
+  #n1 = raw_input('digite o primeiro numero para o produto: ')
+  #n2 = raw_input('digite o segundo numero para o produto: ')
+  #produto = operacoes.produto(n1, n2)
+  #print produto
+  
+  #print operacoes.fatorial(int(float(produto)))
+  #operacoes.fatorial(n1)
+  n1 = 300
+  operacoes.fatorial(n1)
+  #operacoes.soma(n1, n2)
+  #operacoes.produto(n1, n2)
+  #threading.Thread(target=operacoes.soma, args=(n1, n2)).start()
+  
