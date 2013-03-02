@@ -97,9 +97,9 @@ class Operacoes(object):
         return resultado
 
     @Decorator_funcoes()
-    def fatorial(self, x):
-        tipo = settings.OPERACOES['fatorial']['nome']
-        resultado = self.requisita(tipo, (x,))
+    def levenshtein(self, x, y):
+        tipo = settings.OPERACOES['levenshtein']['nome']
+        resultado = self.requisita(tipo, (x, y))
         return resultado
 
     def gera_mensagem_16(self, msg):
@@ -133,7 +133,6 @@ class Operacoes(object):
           mensagem = "{} {} {}".format(mensagem, *args)
         print '\033[0;32mRequisitando \033[1;33m{} \033[0;32mpara \033[1;33m{} \033[0m'.format(mensagem, endereco[0])
         try:
-            print mensagem
             s.send(mensagem)
             dados = s.recv(self.MAX_PACOTE)
         except socket.timeout:
@@ -167,7 +166,7 @@ if __name__=='__main__':
                 dados_operacao = settings.OPERACOES[operacao]
                 valores = []
                 for i in xrange(dados_operacao['num_args']):
-                    valores.append(raw_input('\033[0;32m{}º valor: \033[0m'.format(i+1)))
+                    valores.append(raw_input('\033[0;32m{}º argumento: \033[0m'.format(i+1)))
                 resultado = operacoes.__getattribute__(dados_operacao['funcao'])(*valores)
                 if resultado != settings.SERVIDOR_ERRO and resultado != settings.DNS_ERRO_MSG:
                     if len(valores) == 1:
