@@ -37,17 +37,15 @@ def Decorator_requisita():
             tipo = args[1]
             print '\033[0;32mPerguntando quem tem a operação: \033[1;33m{}\033[0m'.format(tipo)
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            #s.settimeout(1)
+            s.settimeout(1)
             endereco = (settings.SERVIDOR_DNS_IP, settings.SERVIDOR_DNS_PORTA)
             try:
                 msg = objeto_operacao.criptografa_mensagem(tipo)
-                print msg
                 s.sendto(msg, endereco)
                 resposta, endereco = s.recvfrom(objeto_operacao.MAX_PACOTE)
                 resposta = objeto_operacao.decriptografa_mensagem(resposta).strip()
-            except socket.timeout as e:
+            except socket.timeout:
                 print '\033[1;31mServidor DNS desconectado\033[0m'
-                print e
                 return settings.SERVIDOR_ERRO
             except socket.error:
                 print '\033[1;31mFalha na conexão com o Servidor DNS\033[0m'
@@ -101,7 +99,7 @@ class Operacoes(object):
     @Decorator_funcoes()
     def fatorial(self, x):
         tipo = settings.OPERACOES['fatorial']['nome']
-        resultado = self.requisita(tipo, (x))
+        resultado = self.requisita(tipo, (x,))
         return resultado
 
     def gera_mensagem_16(self, msg):
@@ -135,6 +133,7 @@ class Operacoes(object):
           mensagem = "{} {} {}".format(mensagem, *args)
         print '\033[0;32mRequisitando \033[1;33m{} \033[0;32mpara \033[1;33m{} \033[0m'.format(mensagem, endereco[0])
         try:
+            print mensagem
             s.send(mensagem)
             dados = s.recv(self.MAX_PACOTE)
         except socket.timeout:
