@@ -8,6 +8,9 @@ import functools
 import settings
 import hashlib
 from Crypto.Cipher import AES
+import pickle
+from Crypto.PublicKey import RSA
+from Crypto.Util import randpool
 
 
 def Decorator_funcoes():
@@ -40,10 +43,10 @@ def Decorator_requisita():
             s.settimeout(1)
             endereco = (settings.SERVIDOR_DNS_IP, settings.SERVIDOR_DNS_PORTA)
             try:
-                msg = objeto_operacao.criptografa_mensagem(tipo)
+                msg = objeto_operacao.criptografa_mensagem_dns(tipo)
                 s.sendto(msg, endereco)
                 resposta, endereco = s.recvfrom(objeto_operacao.MAX_PACOTE)
-                resposta = objeto_operacao.decriptografa_mensagem(resposta).strip()
+                resposta = objeto_operacao.decriptografa_mensagem_dns(resposta).strip()
             except socket.timeout:
                 print '\033[1;31mServidor DNS desconectado\033[0m'
                 return settings.SERVIDOR_ERRO
@@ -71,7 +74,11 @@ class Operacoes(object):
         self.MAX_PACOTE = 1024
         self.md5 = hashlib.md5('Linux').hexdigest()
         self.aes = AES.new(self.md5, AES.MODE_ECB)
-  
+        blah = randpool.RandomPool()
+        self.rsa_privatekey = RSA.generate(1024, blah.get_bytes)
+        self.rsa_publickey = self.rsa_privatekey.publickey()
+
+
     @Decorator_funcoes()
     def subtracao(self, x, y):
         tipo = settings.OPERACOES['subtracao']['nome']
@@ -105,12 +112,12 @@ class Operacoes(object):
     def gera_mensagem_16(self, msg):
         return msg + ' ' * (16 - len(msg) % 16)
 
-    def criptografa_mensagem(self, msg):
+    def criptografa_mensagem_dns(self, msg):
         msg = self.gera_mensagem_16(msg)
         msg = self.aes.encrypt(msg)
         return msg
 
-    def decriptografa_mensagem(self, msg):
+    def decriptografa_mensagem_dns(self, msg):
         msg = self.aes.decrypt(msg)
         return msg
 
@@ -133,8 +140,14 @@ class Operacoes(object):
           mensagem = "{} {} {}".format(mensagem, *args)
         print '\033[0;32mRequisitando \033[1;33m{} \033[0;32mpara \033[1;33m{} \033[0m'.format(mensagem, endereco[0])
         try:
-            s.send(mensagem)
-            dados = s.recv(self.MAX_PACOTE)
+            s.send(pickle.dumps(self.rsa_publickey))
+            publickey_servidor_string = s.recv(self.MAX_PACOTE)
+            publickey_servidor = pickle.loads(publickey_servidor_string)
+            msg_criptografada = publickey_servidor.encrypt(mensagem, 32)[0]
+
+            s.send(msg_criptografada)
+            dados_criptografados = s.recv(self.MAX_PACOTE)
+            dados = self.rsa_privatekey.decrypt(dados_criptografados)
         except socket.timeout:
             print '\033[1;31mFalha na conexão com o Servidor de Operações \033[1;33m{}'.format(servidor_ip)
             return settings.SERVIDOR_ERRO
