@@ -214,3 +214,12 @@
 [02/03/2013 15:00:32] - Recebendo requisição da operação "divisao" pelo IP 10.3.1.20
 [02/03/2013 15:00:32] - Resposta: 10.3.1.18
 
+[02/03/2013 16:10:40] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 16:10:40] - Resposta: 10.3.1.18
+
+[02/03/2013 16:11:03] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 16:11:03] - Resposta: 10.3.1.18
+
+[02/03/2013 16:11:09] - Recebendo requisição da operação "soma" pelo IP 10.3.1.20
+[02/03/2013 16:11:09] - Resposta: 10.3.1.21
+
