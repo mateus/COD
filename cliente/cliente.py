@@ -48,8 +48,8 @@ def Decorator_requisita():
                 resposta, endereco = s.recvfrom(objeto_operacao.MAX_PACOTE)
                 resposta = objeto_operacao.decriptografa_mensagem_dns(resposta).strip()
             except socket.timeout:
-                msg_erro = 'dns_desconectado'
-                print '\033[1;31m{}\033[0m'.format(msg_erro)
+                msg_erro = 'servidor_dns_desconectado'
+                print '\033[1;31m{}\033[0m'.format(settings.MSGS_ERRO['servidor_dns_desconectado'])
                 return msg_erro
             except socket.error:
                 msg_erro = 'sem_conexao'
