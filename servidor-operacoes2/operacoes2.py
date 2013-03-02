@@ -21,7 +21,7 @@ class Operacoes2Servidor:
 
     def enviar(self, valor, endereco):
         aux = 0
-        tam = len(valor)
+        #tam = len(valor)
         #if tam > self.MAX_PACOTE:
         #   for i in xrange(tam / self.MAX_PACOTE):
         #       pacote = valor[i*self.MAX_PACOTE:(i+1)*self.MAX_PACOTE]
@@ -29,7 +29,7 @@ class Operacoes2Servidor:
         #else:
         #   self.server_socket.sendto(valor, endereco)
         print '\033[0;32mResultado: \033[1;33m{}\033[0m\n'.format(valor)
-        self.conn.send(valor)
+        self.conn.send(str(valor))
         self.conn.close()
 
     def soma(self, x, y):
@@ -39,79 +39,24 @@ class Operacoes2Servidor:
         except:
             return 'ERRO'
 
-    def fatorial(self, x, y=1):
-        resultado = 1
-        try:
-            num = int(x)
-            if num < 0:
-                return 'ERRO'
-            lista = xrange(y, num+1)
-            for n in lista:
-                resultado = int(n) * resultado
-            x = resultado
-            return str(resultado)
-        except:
-            return 'ERRO'
+    def levenshtein(self, a, b):
+        n, m = len(a), len(b)
+        if n > m:
+            # Make sure n <= m, to use O(min(n,m)) space
+            a,b = b,a
+            n,m = m,n
 
-    def xfatorial2(self, lista, x, inicio=0):
-        resultado = 1
-        try:
-            if x < 0:
-                return 'ERRO'
-            l = xrange(inicio + 1, x+1)
-            for num in l:
-                resultado *= int(num)
-            #self.n *= resultado
-            #print self.n + ' ' + resultado
-            #self.fatorial[0] *= resultado
-            lista.append(resultado)
-            #return str(resultado)
-            return str(resultado)
-        except:
-            return 'ERRO'
+        current = range(n+1)
+        for i in range(1,m+1):
+            previous, current = current, [i]+[0]*n
+            for j in range(1,n+1):
+                add, delete = previous[j]+1, current[j-1]+1
+                change = previous[j-1]
+                if a[j-1] != b[i-1]:
+                    change = change + 1
+                current[j] = min(add, delete, change)
 
-    def xfatorial(self, x):
-        #self.n = 0
-        lista = Manager().list()
-        n1 = int(x)/2
-        n2 = int(x)
-        p1 = Process(target=self.xfatorial2, args=(lista, n1, ))
-        p2 = Process(target=self.xfatorial2, args=(lista, n2, n1))
-        p1.start()
-        p2.start()
-        p1.join()
-        p2.join()
-        #print self.n
-        resultado = 1
-        for l in lista:
-            resultado *= l
-        #print resultado
-        return str(resultado)
-
-    def xfatorial_var_cpus(self, x):
-        x = int(x)
-        lista = Manager().list()
-        numeroCPUs = multiprocessing.cpu_count()
-        intervalo = x / numeroCPUs
-        nums = []
-        for i in xrange(numeroCPUs):
-            nums.append(x - (i * intervalo))
-        procs = []
-        for i in xrange(len(nums)):
-            if (i == 0):
-                p = Process(target=self.xfatorial2, args=(lista, nums[i]))
-            else:
-                p = Process(target=self.xfatorial2, args=(lista, nums[i], nums[i-1]))
-            procs.append(p)
-            p.start()
-            
-        for i in procs:
-            i.join()
-        resultado = 1
-        for l in lista:
-            resultado *= l
-        #print resultado
-        return str(resultado)
+        return str(current[n])
 
     def iniciar(self):
         while(1):
@@ -123,10 +68,8 @@ class Operacoes2Servidor:
 
             if data[0] == "soma":
                 Thread(target=self.enviar, args=(self.soma(data[1], data[2]), addr)).start()
-            elif data[0] == "fatorial":
-                Thread(target=self.enviar, args=(self.fatorial(data[1]), addr)).start()
-            elif data[0] == "xfatorial":
-                Thread(target=self.enviar, args=(self.xfatorial_var_cpus(data[1]), addr)).start()
+            elif data[0] == "levenshtein":
+                Thread(target=self.enviar, args=(self.levenshtein(data[1], data[2]), addr)).start()
 
 op = Operacoes2Servidor(settings.SERVIDOR_OP2_IP)
 op.iniciar()
