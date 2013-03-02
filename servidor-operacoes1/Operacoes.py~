@@ -1,0 +1,66 @@
+#coding: utf-8
+from socket import *
+from threading import Thread
+import multiprocessing
+from multiprocessing import Process, Manager
+
+class OperacoesServidor:
+	def __init__(self, ip):
+		self.ip = ip
+		self.address = (ip, 8888)
+		self.server_socket = socket(AF_INET, SOCK_DGRAM)
+		self.server_socket.bind(self.address)
+		self.MAX_PACOTE = 15
+
+	def enviar(self, valor, endereco):
+		aux = 0
+		tam = len(valor)
+		if tam > self.MAX_PACOTE:
+			for i in xrange(tam / self.MAX_PACOTE):
+				pacote = valor[i*self.MAX_PACOTE:(i+1)*self.MAX_PACOTE]
+				self.server_socket.sendto(pacote, endereco)
+		else:
+			self.server_socket.sendto(valor, endereco)
+		self.server_socket.sendto('FIM', endereco)
+
+	def subtracao(self, x, y):
+		try:
+			return str(float(x) - float(y))
+		except:
+			return 'ERRO'
+
+	def soma(self, x, y):
+		try:
+			return str(float(x) + float(y))
+		except:
+			return 'ERRO'
+			
+	def divisao(self, x, y):
+		try:
+			return str(float(x) / float(y))
+		except:
+			return 'ERRO'
+	
+
+	def produto(self, x, y):
+		try:
+			return str(float(x) * float(y))
+		except:
+			return 'ERRO'
+
+	def iniciar(self):
+		while(1):
+			recv_data, addr = self.server_socket.recvfrom(1024)
+			data = recv_data.split()
+			print data
+			if data[0] == "soma":
+				Thread(target=self.enviar, args=(self.soma(data[1], data[2]), addr)).start()
+			elif data[0] == "subtracao":
+				Thread(target=self.enviar, args=(self.subtracao(data[1], data[2]), addr)).start()
+			elif data[0] == "produto":
+				Thread(target=self.enviar, args=(self.produto(data[1], data[2]), addr)).start()
+			elif data[0] == "divisao":
+				Thread(target=self.enviar, args=(self.divisao(data[1], data[2]), addr)).start()
+
+op = OperacoesServidor('10.3.1.18')
+op.iniciar()
