@@ -48,20 +48,23 @@ def Decorator_requisita():
                 resposta, endereco = s.recvfrom(objeto_operacao.MAX_PACOTE)
                 resposta = objeto_operacao.decriptografa_mensagem_dns(resposta).strip()
             except socket.timeout:
-                print '\033[1;31mServidor DNS desconectado\033[0m'
-                return settings.SERVIDOR_ERRO
+                msg_erro = 'dns_desconectado'
+                print '\033[1;31m{}\033[0m'.format(msg_erro)
+                return msg_erro
             except socket.error:
+                msg_erro = 'sem_conexao'
                 print '\033[1;31mFalha na conexão com o Servidor DNS\033[0m'
-                return settings.SERVIDOR_ERRO
-            if resposta == settings.DNS_ERRO_MSG:
+                return msg_erro
+            if resposta == settings.MSGS_ERRO['erro']:
                 print '\033[0;32mOperação \033[1;33m{} \033[0;32minexistente\033[0m'.format(tipo)
-                return settings.DNS_ERRO_MSG
+                return 'operacao_inexistente'
             else:
                 ip_servidor_operacoes = resposta
                 print '\033[1;33m{} \033[0;32mtem a operação \033[1;33m{}\033[0m'.format(ip_servidor_operacoes, tipo)
                 resultado = self.fn(objeto_operacao, tipo, args[2], ip_servidor_operacoes)
-                if resultado == settings.SERVIDOR_ERRO:
+                if resultado == settings.MSGS_ERRO['erro']:
                     print '\033[1;31mServidor de Operações retornou erro\033[0m'
+                    return 'servidor_operacoes_erro'
                 return resultado
 
     return _Decorator_requisita
@@ -130,10 +133,10 @@ class Operacoes(object):
             s.connect(endereco)
         except socket.timeout:
             print '\033[1;31mFalha na conexão com o Servidor de Operações \033[1;33m{}'.format(servidor_ip)
-            return settings.SERVIDOR_ERRO
+            return 'falha_conexao_servidor_operacoes'
         except socket.error:
             print '\033[1;31mFalha na conexão com o Servidor de Operações \033[1;33m{}'.format(servidor_ip)
-            return settings.SERVIDOR_ERRO
+            return 'falha_conexao_servidor_operacoes'
         if(len(args) == 1):
           mensagem = "{} {}".format(mensagem, *args)
         elif(len(args) == 2):
@@ -150,10 +153,10 @@ class Operacoes(object):
             dados = self.rsa_privatekey.decrypt(dados_criptografados)
         except socket.timeout:
             print '\033[1;31mFalha na conexão com o Servidor de Operações \033[1;33m{}'.format(servidor_ip)
-            return settings.SERVIDOR_ERRO
+            return 'falha_conexao_servidor_operacoes'
         except socket.error:
             print '\033[1;31mFalha na conexão com o Servidor de Operações \033[1;33m{}'.format(servidor_ip)
-            return settings.SERVIDOR_ERRO
+            return 'falha_conexao_servidor_operacoes'
 
         #dados = ''
         #dado, endereco = s.recvfrom(self.MAX_PACOTE)
@@ -181,7 +184,7 @@ if __name__=='__main__':
                 for i in xrange(dados_operacao['num_args']):
                     valores.append(raw_input('\033[0;32m{}º argumento: \033[0m'.format(i+1)))
                 resultado = operacoes.__getattribute__(dados_operacao['funcao'])(*valores)
-                if resultado != settings.SERVIDOR_ERRO and resultado != settings.DNS_ERRO_MSG:
+                if resultado not in settings.MSGS_ERRO:
                     if len(valores) == 1:
                         print '\033[0;32m{} de \033[1;33m{} \033[0;32mé \033[1;33m{}\033[0m'.format(dados_operacao['nome'], valores[0], resultado)
                     else:
