@@ -3,8 +3,6 @@ COD
 
 Controle de Operações Distribuídas
 
-## Screenshots
-
 Cliente
 -------
 ![ft1](https://raw.github.com/mtsferreirasilva/COD/master/screenshots/cliente.png)
