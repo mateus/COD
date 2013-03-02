@@ -47,7 +47,7 @@ class Operacoes1Servidor:
         try:
             return str(float(x) / float(y))
         except ZeroDivisionError:
-            return 'INFINITO'
+            return 'INDEFINIDO'
         except:
             return 'ERRO'
 
