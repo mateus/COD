@@ -9,10 +9,10 @@ from datetime import datetime
 from Crypto.Cipher import AES
 
 
-class ServidorDNS():
+class ServidorNomes():
     def __init__(self, ip):
         self.ip = ip
-        self.address = (ip, settings.SERVIDOR_DNS_PORTA)
+        self.address = (ip, settings.SERVIDOR_NOMES_PORTA)
         self.server_socket = socket(AF_INET, SOCK_DGRAM)
         self.server_socket.bind(self.address)
         self.md5 = hashlib.md5('Linux').hexdigest()
@@ -73,5 +73,5 @@ class ServidorDNS():
             print '\n\033[1;34m === Servidor de Nomes finalizado === \033[0m \n'
             exit()
 
-dns = ServidorDNS(settings.SERVIDOR_DNS_IP)
-dns.iniciar()
+servidorNomes = ServidorNomes(settings.SERVIDOR_NOMES_IP)
+servidorNomes.iniciar()
