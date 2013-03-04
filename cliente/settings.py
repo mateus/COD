@@ -13,7 +13,7 @@ OPERACOES = {
                 'levenshtein' : {'nome': 'levenshtein', 'funcao': 'levenshtein', 'num_args' : 2},
             }
 
-MSGS_ERRO = {'servidor_dns_desconectado' : 'Servidor DNS desconectado', 
+MSGS_ERRO = {'servidor_dns_desconectado' : 'Servidor de Nomes desconectado', 
 			 'sem_conexao' : 'Verifique sua conexão com a internet', 
 			 'operacao_inexistente' : 'Operação inexistente',
 			 'servidor_operacoes_desconectado' : 'Servidor de operações desconectado',

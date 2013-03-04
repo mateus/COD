@@ -53,7 +53,7 @@ class ServidorDNS():
 
     def iniciar(self):
         tamanhos = self.carrega_tamanhos()
-        print '\033[1;34m === Servidor DNS iniciado === \033[0m \n'
+        print '\033[1;34m === Servidor de Nomes iniciado === \033[0m \n'
         try:
             while 1:
                 recv_data, addr = self.server_socket.recvfrom(1024)
@@ -70,7 +70,7 @@ class ServidorDNS():
                     f.write('[{0}] - Recebendo requisição da operação "{1}" pelo IP {2}\n'.format(self.hora_atual(), recv_data, addr[0]))
                     f.write('[{0}] - Resposta: {1}\n\n'.format(self.hora_atual(), resposta))
         except KeyboardInterrupt:
-            print '\n\033[1;34m === Servidor DNS finalizado === \033[0m \n'
+            print '\n\033[1;34m === Servidor de Nomes finalizado === \033[0m \n'
             exit()
 
 dns = ServidorDNS(settings.SERVIDOR_DNS_IP)
